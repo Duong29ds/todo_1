@@ -1,10 +1,9 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import "./App.css";
 import TaskList from "./User/components/ToDoList/TaskList";
 import Task from "./User/components/ToDoList/Task";
 import FormTaskNew from "./User/components/ToDoList/FormTaskNew";
 import RadioButton from "./User/components/ui/RadioButton";
-import Modal from "./User/components/ui/Modal";
 
 function App() {
   const [statusTask, setStatusTask] = useState("All");
@@ -40,7 +39,17 @@ function App() {
 
   const handleDeleteTask = (id) => {
     DUMMY_DATA = taskArray.filter((task) => task.id !== id);
-    setTaskArray(([]) => [...DUMMY_DATA]);
+    setTaskArray([...DUMMY_DATA]);
+  };
+
+  const handleEditTask = (description, id) => {
+    DUMMY_DATA = taskArray.map((task) => {
+      if (task.id === id) {
+        task.description = description;
+      }
+      return task;
+    });
+    setTaskArray([...DUMMY_DATA]);
   };
 
   let DUMMY_DATA;
@@ -77,10 +86,13 @@ function App() {
               completed={task.completed}
               handleChangeComplete={handleChangeComplete}
               deleteTask={handleDeleteTask}
+              editTask={handleEditTask}
             />
           ))}
         </TaskList>
-        <RadioButton getStatus={getStatusHandler} />
+        <div className="radios">
+          <RadioButton getStatus={getStatusHandler} />
+        </div>
       </div>
     </div>
   );

@@ -12,23 +12,24 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "50%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid rgba(0,0,0,0.5)",
   boxShadow: 24,
   p: 4,
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "2rem",
+};
+
+const styleButtons = {
+  fontSize: "1.5rem",
 };
 
 const Task = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const Task = {
-    id: props.id,
-    description: props.description,
-    completed: props.completed,
-  };
 
   let [checked, setChecked] = useState(props.completed);
   const [description, setDescription] = useState(props.description);
@@ -39,11 +40,12 @@ const Task = (props) => {
   };
 
   const handleEditTask = (event) => {
-    setDescription(event.target.description);
+    setDescription(event.target.value);
   };
 
   const handleSubmitEdit = () => {
-    props.editTask(Task, props.id);
+    props.editTask(description, props.id);
+    handleClose();
   };
 
   const handleDelete = () => {
@@ -60,14 +62,14 @@ const Task = (props) => {
       <p className={classes.task_title}>{props.description}</p>
       <div className={classes.task_btn_box}>
         <Stack direction="row" spacing={2}>
-          <Button color="secondary" size="large" onClick={handleOpen}>
+          <Button color="secondary" onClick={handleOpen} sx={styleButtons}>
             Edit
           </Button>
           <Button
             variant="outlined"
             color="error"
-            size="large"
             onClick={handleDelete}
+            sx={styleButtons}
           >
             Delete
           </Button>
@@ -88,7 +90,7 @@ const Task = (props) => {
               description={description}
               onChange={handleEditTask}
             />
-            <button className={classes.submit_btn} onClick={handleSubmitEdit}>
+            <button className={classes.form_btn} onClick={handleSubmitEdit}>
               submit
             </button>
           </Box>

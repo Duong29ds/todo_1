@@ -11,12 +11,19 @@
   width: 100%;
   height: 4rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
+  font-size: 2rem;
+  border-radius: 1rem;
+  padding: 0 1rem;
 }
 
 .form_btn {
   width: 20%;
-  background-color: #03a9fc;
+  background-color: #fbab7e;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
+  font-size: 2rem;
+}
+
+.form_btn:hover {
+  background-color: rgba(200, 80, 192, 0.5);
 }

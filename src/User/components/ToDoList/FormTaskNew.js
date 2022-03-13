@@ -5,19 +5,21 @@ const FormTaskNew = (props) => {
   const [description, setDescription] = useState("");
   const newTask = { id: `${Math.random()}`, description: "", completed: false };
   const handleChange = (event) => {
-    newTask.description = event.target.value;
+    setDescription(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    newTask.description = description;
     props.addTask(newTask);
-    console.log(newTask);
+    setDescription("");
   };
 
   return (
     <form className={classes.formTaskNew} onSubmit={handleSubmit}>
       <input
         type="text"
+        value={description}
         placeholder="What do you gonna do?"
         className={classes.form_input}
         description={description}
